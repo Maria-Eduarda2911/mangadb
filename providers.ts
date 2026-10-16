@@ -138,14 +138,17 @@ export function browse(o: { q?: string; genres: string[]; sort: SortKey; page: n
   });
 }
 
-function fallbackHome(): Home {
-  const base: Item[] = [
+function fallbackBase(): Item[] {
+  return [
     { id: 'fallback-1', title: 'One Piece', names: ['One Piece'], synopsis: 'A jornada épica de Luffy em busca do maior tesouro do mundo.', genres: ['Ação', 'Aventura', 'Comédia'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a.jpg', rating: 9.8, externalUrls: ['https://mangadex.org/title/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/one-piece'], al: 30013 },
     { id: 'fallback-2', title: 'Jujutsu Kaisen', names: ['Jujutsu Kaisen'], synopsis: 'Um estudante entra no mundo dos feitiços para enfrentar criaturas aterrorizantes.', genres: ['Ação', 'Sobrenatural'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d.jpg', rating: 9.4, externalUrls: ['https://mangadex.org/title/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/jujutsu-kaisen'], al: 113138 },
     { id: 'fallback-3', title: 'Solo Leveling', names: ['Solo Leveling'], synopsis: 'Um caçador fraco é transformado em um protagonista poderoso em um mundo repleto de monstros.', genres: ['Ação', 'Fantasia', 'Aventura'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285.jpg', rating: 9.3, externalUrls: ['https://mangadex.org/title/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285/solo-leveling'], al: 13315 },
     { id: 'fallback-4', title: 'Attack on Titan', names: ['Attack on Titan'], synopsis: 'Humanidade tenta sobreviver às muralhas e aos gigantes que ameaçam a paz.', genres: ['Ação', 'Drama', 'Fantasia'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea.jpg', rating: 9.7, externalUrls: ['https://mangadex.org/title/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea/shingeki-no-kyojin'], al: 23390 },
   ];
+}
 
+function fallbackHome(): Home {
+  const base = fallbackBase();
   return {
     manga: base.slice(0, 3),
     trending: base,
@@ -154,6 +157,10 @@ function fallbackHome(): Home {
     manhwa: base.slice(1, 4),
     manhua: base.slice(0, 3),
   };
+}
+
+function fallbackLookup(): Record<string, Item> {
+  return Object.fromEntries(fallbackBase().map((item) => [item.id, item]));
 }
 
 export function home(): Promise<Home> {
