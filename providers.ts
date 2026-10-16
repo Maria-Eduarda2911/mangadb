@@ -138,7 +138,7 @@ export function browse(o: { q?: string; genres: string[]; sort: SortKey; page: n
   });
 }
 
-function fallbackBase(): Item[] {
+export function fallbackBase(): Item[] {
   return [
     { id: 'fallback-1', title: 'One Piece', names: ['One Piece'], synopsis: 'A jornada épica de Luffy em busca do maior tesouro do mundo.', genres: ['Ação', 'Aventura', 'Comédia'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a.jpg', rating: 9.8, externalUrls: ['https://mangadex.org/title/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/one-piece'], al: 30013 },
     { id: 'fallback-2', title: 'Jujutsu Kaisen', names: ['Jujutsu Kaisen'], synopsis: 'Um estudante entra no mundo dos feitiços para enfrentar criaturas aterrorizantes.', genres: ['Ação', 'Sobrenatural'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d.jpg', rating: 9.4, externalUrls: ['https://mangadex.org/title/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/jujutsu-kaisen'], al: 113138 },
@@ -147,7 +147,7 @@ function fallbackBase(): Item[] {
   ];
 }
 
-function fallbackHome(): Home {
+export function fallbackHome(): Home {
   const base = fallbackBase();
   return {
     manga: base.slice(0, 3),

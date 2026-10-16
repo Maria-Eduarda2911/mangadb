@@ -34,6 +34,41 @@ type Palette = ReturnType<typeof getThemePalette>;
 const sans = { fontFamily: 'Arial, sans-serif' } as const;
 const box = (p: Palette) => ({ background: p.panel, border: `2px solid ${p.border}`, boxShadow: '6px 6px 0 rgba(0,0,0,0.10)' });
 
+const FALLBACK_HOME: HomeData = {
+  manga: [
+    { id: 'fallback-1', title: 'One Piece', synopsis: 'A jornada épica de Luffy em busca do maior tesouro do mundo.', genres: ['Ação', 'Aventura', 'Comédia'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a.jpg', rating: 9.8, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-2', title: 'Jujutsu Kaisen', synopsis: 'Um estudante entra no mundo dos feitiços para enfrentar criaturas aterrorizantes.', genres: ['Ação', 'Sobrenatural'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d.jpg', rating: 9.4, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-3', title: 'Solo Leveling', synopsis: 'Um caçador fraco é transformado em um protagonista poderoso em um mundo repleto de monstros.', genres: ['Ação', 'Fantasia', 'Aventura'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285.jpg', rating: 9.3, sources: [], synopsisLang: 'original' },
+  ],
+  trending: [
+    { id: 'fallback-1', title: 'One Piece', synopsis: 'A jornada épica de Luffy em busca do maior tesouro do mundo.', genres: ['Ação', 'Aventura', 'Comédia'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a.jpg', rating: 9.8, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-2', title: 'Jujutsu Kaisen', synopsis: 'Um estudante entra no mundo dos feitiços para enfrentar criaturas aterrorizantes.', genres: ['Ação', 'Sobrenatural'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d.jpg', rating: 9.4, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-3', title: 'Solo Leveling', synopsis: 'Um caçador fraco é transformado em um protagonista poderoso em um mundo repleto de monstros.', genres: ['Ação', 'Fantasia', 'Aventura'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285.jpg', rating: 9.3, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-4', title: 'Attack on Titan', synopsis: 'Humanidade tenta sobreviver às muralhas e aos gigantes que ameaçam a paz.', genres: ['Ação', 'Drama', 'Fantasia'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea.jpg', rating: 9.7, sources: [], synopsisLang: 'original' },
+  ],
+  recent: [
+    { id: 'fallback-1', title: 'One Piece', synopsis: 'A jornada épica de Luffy em busca do maior tesouro do mundo.', genres: ['Ação', 'Aventura', 'Comédia'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a.jpg', rating: 9.8, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-2', title: 'Jujutsu Kaisen', synopsis: 'Um estudante entra no mundo dos feitiços para enfrentar criaturas aterrorizantes.', genres: ['Ação', 'Sobrenatural'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d.jpg', rating: 9.4, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-3', title: 'Solo Leveling', synopsis: 'Um caçador fraco é transformado em um protagonista poderoso em um mundo repleto de monstros.', genres: ['Ação', 'Fantasia', 'Aventura'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285.jpg', rating: 9.3, sources: [], synopsisLang: 'original' },
+  ],
+  top: [
+    { id: 'fallback-1', title: 'One Piece', synopsis: 'A jornada épica de Luffy em busca do maior tesouro do mundo.', genres: ['Ação', 'Aventura', 'Comédia'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a.jpg', rating: 9.8, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-2', title: 'Jujutsu Kaisen', synopsis: 'Um estudante entra no mundo dos feitiços para enfrentar criaturas aterrorizantes.', genres: ['Ação', 'Sobrenatural'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d.jpg', rating: 9.4, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-3', title: 'Solo Leveling', synopsis: 'Um caçador fraco é transformado em um protagonista poderoso em um mundo repleto de monstros.', genres: ['Ação', 'Fantasia', 'Aventura'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285.jpg', rating: 9.3, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-4', title: 'Attack on Titan', synopsis: 'Humanidade tenta sobreviver às muralhas e aos gigantes que ameaçam a paz.', genres: ['Ação', 'Drama', 'Fantasia'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea.jpg', rating: 9.7, sources: [], synopsisLang: 'original' },
+  ],
+  manhwa: [
+    { id: 'fallback-2', title: 'Jujutsu Kaisen', synopsis: 'Um estudante entra no mundo dos feitiços para enfrentar criaturas aterrorizantes.', genres: ['Ação', 'Sobrenatural'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d.jpg', rating: 9.4, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-3', title: 'Solo Leveling', synopsis: 'Um caçador fraco é transformado em um protagonista poderoso em um mundo repleto de monstros.', genres: ['Ação', 'Fantasia', 'Aventura'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285.jpg', rating: 9.3, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-4', title: 'Attack on Titan', synopsis: 'Humanidade tenta sobreviver às muralhas e aos gigantes que ameaçam a paz.', genres: ['Ação', 'Drama', 'Fantasia'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea.jpg', rating: 9.7, sources: [], synopsisLang: 'original' },
+  ],
+  manhua: [
+    { id: 'fallback-1', title: 'One Piece', synopsis: 'A jornada épica de Luffy em busca do maior tesouro do mundo.', genres: ['Ação', 'Aventura', 'Comédia'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a.jpg', rating: 9.8, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-2', title: 'Jujutsu Kaisen', synopsis: 'Um estudante entra no mundo dos feitiços para enfrentar criaturas aterrorizantes.', genres: ['Ação', 'Sobrenatural'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d.jpg', rating: 9.4, sources: [], synopsisLang: 'original' },
+    { id: 'fallback-3', title: 'Solo Leveling', synopsis: 'Um caçador fraco é transformado em um protagonista poderoso em um mundo repleto de monstros.', genres: ['Ação', 'Fantasia', 'Aventura'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285.jpg', rating: 9.3, sources: [], synopsisLang: 'original' },
+  ],
+};
+
 export default function Home() {
   const [theme, setTheme] = useState<ThemeMode>('light');
   const [q, setQ] = useState('');
@@ -45,8 +80,8 @@ export default function Home() {
   const [genres, setGenres] = useState<string[]>([]);
   const [sort, setSort] = useState<SortKey>('relevance');
   const [freeOnly, setFreeOnly] = useState(false);
-  const [home, setHome] = useState<HomeData | null>(null);
-  const [homeLoading, setHomeLoading] = useState(true);
+  const [home, setHome] = useState<HomeData | null>(FALLBACK_HOME);
+  const [homeLoading, setHomeLoading] = useState(false);
   const [homeError, setHomeError] = useState(false);
   const [open, setOpen] = useState<Card | null>(null);
   const abortRef = useRef<AbortController | null>(null);
