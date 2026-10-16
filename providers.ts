@@ -237,7 +237,10 @@ async function translatePt(text: string): Promise<string | null> {
 export function detail(id: string): Promise<Card> {
   return cached('d:' + id, 15 * 60_000, async () => {
     let item: Item;
-    if (id.startsWith('al-')) {
+    const fallback = fallbackLookup();
+    if (fallback[id]) {
+      item = fallback[id];
+    } else if (id.startsWith('al-')) {
       const d = await gql(`query($id:Int){Media(id:$id,type:MANGA){${F}}}`, { id: Number(id.slice(3)) });
       if (!d.Media) throw new Error('not_found');
       item = alItem(d.Media);
