@@ -12,13 +12,15 @@ type Card = {
 };
 type SortKey = 'relevance' | 'popular' | 'score' | 'recent';
 const pt = (g: string) => GENRE_PT[g] ?? g;
-type HomeData = { trending: Card[]; recent: Card[]; top: Card[]; manhwa: Card[] };
+type HomeData = { manga: Card[]; trending: Card[]; recent: Card[]; top: Card[]; manhwa: Card[]; manhua: Card[] };
 
 const SECTIONS: [string, keyof HomeData][] = [
   ['Mais lidos agora', 'trending'],
   ['Novos destaques', 'recent'],
   ['Mais bem avaliados', 'top'],
+  ['Mangás em alta', 'manga'],
   ['Manhwa em alta', 'manhwa'],
+  ['Manhua em alta', 'manhua'],
 ];
 
 function getThemePalette(theme: ThemeMode) {
@@ -109,8 +111,10 @@ export default function Home() {
 
         <section style={{ ...box(p), padding: '28px 26px', marginBottom: 28 }}>
           <h1 style={{ margin: 0, fontSize: 'clamp(2.2rem, 4vw, 4.4rem)', lineHeight: 0.95, letterSpacing: '-0.06em' }}>
-            Onde ler mangá<br />sem dor de cabeça.
+            Descubra mangás, manwhuas e manhuas<br />
+            e onde lê-los legalmente
           </h1>
+
           <p style={{ ...sans, color: p.muted, fontSize: 17, lineHeight: 1.6, maxWidth: 640, margin: '16px 0 20px' }}>
             Títulos populares, novos e bem avaliados, com links para ler ou comprar em plataformas oficiais.
           </p>

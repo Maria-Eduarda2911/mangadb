@@ -10,17 +10,17 @@
 
 </div>
 
-MangaDB é um catálogo digital de mangás pensado para reunir obras populares, recentes e em alta em uma experiência visual mais editorial e envolvente. O projeto foi desenvolvido com foco em organização, identificação rápida de títulos e apresentação visual mais refinada para o público amante de mangá.
+MangaDB é um catálogo digital que reúne mangá, manhwa e manhua em uma experiência visual mais editorial e envolvente. O projeto foi desenvolvido para facilitar a descoberta de títulos populares, recentes e em alta em um só lugar, com foco em organização, identificação rápida e apresentação visual refinada.
 
 ## Visão geral
 
-A ideia central do projeto é centralizar uma seleção de títulos em um painel visual que permita navegar com facilidade por mangás em destaque, novidades e tendências. A interface foi pensada com uma estética retrô, com blocos quadrados, capas marcantes e uma leitura mais próxima de uma prateleira de colecionador.
+A ideia central do projeto é centralizar uma seleção de títulos em um painel visual que permita navegar com facilidade por obras em destaque, novidades e tendências. A interface foi pensada com uma estética retrô, com blocos quadrados, capas marcantes e uma leitura mais próxima de uma prateleira de colecionador.
 
 ## Objetivo
 
 O MangaDB busca:
 
-- facilitar a descoberta de mangás populares e recentes;
+- facilitar a descoberta de mangá, manhwa e manhua;
 - destacar lançamentos e títulos em alta;
 - expor capas oficiais e informações relevantes;
 - organizar a experiência em um layout clean e visualmente marcante;
@@ -37,7 +37,7 @@ O MangaDB busca:
 
 ## Destaques do projeto
 
-- busca por mangás e títulos em destaque;
+- busca por mangá, manhwa e manhua;
 - curadoria por popularidade e novidades;
 - capas de obras em destaque;
 - apresentação de sinopse em português;
@@ -52,4 +52,4 @@ GitHub: https://github.com/Maria-Eduarda2911
 
 ## Sobre o projeto
 
-Esse repositório representa uma aplicação de catálogo editorial de mangás, com foco em apresentação, organização e navegação visual. O objetivo principal é transformar a descoberta de títulos em uma experiência mais agradável e memorável para o usuário.
+Esse repositório representa uma aplicação de catálogo editorial que reúne mangá, manhwa e manhua em uma experiência visualmente envolvente. O objetivo principal é transformar a descoberta de títulos em uma experiência mais agradável, memorável e organizada para o usuário.

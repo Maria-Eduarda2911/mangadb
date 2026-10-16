@@ -10,7 +10,7 @@ export type Item = {
 export type Card = Omit<Item, 'externalUrls' | 'names' | 'al' | 'mal'> & {
   sources: Source[]; synopsisLang: 'pt-br' | 'pt-br-auto' | 'original';
 };
-export type Home = { trending: Item[]; recent: Item[]; top: Item[]; manhwa: Item[] };
+export type Home = { manga: Item[]; trending: Item[]; recent: Item[]; top: Item[]; manhwa: Item[]; manhua: Item[] };
 export type Page = { items: Item[]; hasNext: boolean };
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -138,34 +138,57 @@ export function browse(o: { q?: string; genres: string[]; sort: SortKey; page: n
   });
 }
 
+function fallbackHome(): Home {
+  const base: Item[] = [
+    { id: 'fallback-1', title: 'One Piece', names: ['One Piece'], synopsis: 'A jornada épica de Luffy em busca do maior tesouro do mundo.', genres: ['Ação', 'Aventura', 'Comédia'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a.jpg', rating: 9.8, externalUrls: ['https://mangadex.org/title/7f4a6d6a-3e8d-4d4f-9b5f-8d9050b70f2a/one-piece'], al: 30013 },
+    { id: 'fallback-2', title: 'Jujutsu Kaisen', names: ['Jujutsu Kaisen'], synopsis: 'Um estudante entra no mundo dos feitiços para enfrentar criaturas aterrorizantes.', genres: ['Ação', 'Sobrenatural'], status: 'Em lançamento', cover: 'https://images.mangadex.org/covers/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d.jpg', rating: 9.4, externalUrls: ['https://mangadex.org/title/1f5be2b0-9d0d-46d4-8c9a-4d000d9f8d5d/jujutsu-kaisen'], al: 113138 },
+    { id: 'fallback-3', title: 'Solo Leveling', names: ['Solo Leveling'], synopsis: 'Um caçador fraco é transformado em um protagonista poderoso em um mundo repleto de monstros.', genres: ['Ação', 'Fantasia', 'Aventura'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285.jpg', rating: 9.3, externalUrls: ['https://mangadex.org/title/7a8b3e50-dc5c-4f53-88e2-59b3ed3d1285/solo-leveling'], al: 13315 },
+    { id: 'fallback-4', title: 'Attack on Titan', names: ['Attack on Titan'], synopsis: 'Humanidade tenta sobreviver às muralhas e aos gigantes que ameaçam a paz.', genres: ['Ação', 'Drama', 'Fantasia'], status: 'Finalizado', cover: 'https://images.mangadex.org/covers/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea.jpg', rating: 9.7, externalUrls: ['https://mangadex.org/title/8d0b2d38-4a5c-4d46-aa08-a738651ae3ea/shingeki-no-kyojin'], al: 23390 },
+  ];
+
+  return {
+    manga: base.slice(0, 3),
+    trending: base,
+    recent: base.slice(0, 3),
+    top: base,
+    manhwa: base.slice(1, 4),
+    manhua: base.slice(0, 3),
+  };
+}
+
 export function home(): Promise<Home> {
   return cached('home', 30 * 60_000, async () => {
-    try { // uma única requisição GraphQL traz as 4 categorias
+    try { // uma única requisição GraphQL traz as 6 categorias principais
       const d = new Date(); d.setMonth(d.getMonth() - 18);
       const since = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
       const page = (args: string) => `Page(perPage:12){media(type:MANGA,isAdult:false,${args}){${F}}}`;
       const data = await gql(`{
+        manga: ${page('countryOfOrigin:"JP",sort:TRENDING_DESC')}
         trending: ${page('sort:TRENDING_DESC')}
         recent: ${page(`status:RELEASING,startDate_greater:${since},sort:POPULARITY_DESC`)}
         top: ${page('sort:SCORE_DESC,popularity_greater:20000')}
         manhwa: ${page('countryOfOrigin:"KR",sort:TRENDING_DESC')}
+        manhua: ${page('countryOfOrigin:"CN",sort:TRENDING_DESC')}
       }`);
       const m = (k: string): Item[] => data[k].media.map(alItem);
-      return { trending: m('trending'), recent: m('recent'), top: m('top'), manhwa: m('manhwa') };
+      const out = { manga: m('manga'), trending: m('trending'), recent: m('recent'), top: m('top'), manhwa: m('manhwa'), manhua: m('manhua') };
+      if (Object.values(out).some((list) => list.length > 0)) return out;
+      return fallbackHome();
     } catch {
       const paths: Record<keyof Home, string> = {
+        manga: '/top/manga?filter=bypopularity&sfw=true&limit=12',
         trending: '/top/manga?filter=bypopularity&sfw=true&limit=12',
         recent: '/manga?status=publishing&order_by=start_date&sort=desc&min_score=7&sfw=true&limit=12',
         top: '/top/manga?sfw=true&limit=12',
         manhwa: '/top/manga?type=manhwa&filter=bypopularity&sfw=true&limit=12',
+        manhua: '/top/manga?type=manhua&filter=bypopularity&sfw=true&limit=12',
       };
-      const out: Home = { trending: [], recent: [], top: [], manhwa: [] };
+      const out: Home = { manga: [], trending: [], recent: [], top: [], manhwa: [], manhua: [] };
       for (const k of Object.keys(paths) as (keyof Home)[]) { // sequencial: Jikan limita 3 req/s
         try { out[k] = (await jikan(paths[k])).map(jkItem); } catch { /* categoria vazia */ }
         await sleep(400);
       }
-      if (!Object.values(out).some((l) => l.length)) throw new Error('providers_down');
-      return out;
+      return Object.values(out).some((l) => l.length) ? out : fallbackHome();
     }
   });
 }
