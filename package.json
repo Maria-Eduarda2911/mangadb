@@ -1,0 +1,23 @@
+{
+  "name": "manga-catalog",
+  "private": true,
+  "description": "Catálogo moderno e retrô de mangás com busca, capas oficiais e curadoria em português.",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^16.4.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.16.11",
+    "@types/react": "18.3.11",
+    "typescript": "5.6.3"
+  }
+}
