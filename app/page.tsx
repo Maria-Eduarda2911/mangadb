@@ -100,7 +100,7 @@ export default function Home() {
       <div style={{ maxWidth: 1480, margin: '0 auto', padding: '28px 26px 0' }}>
         <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 18, paddingBottom: 22, marginBottom: 20, borderBottom: `1px solid ${p.border}` }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
-            <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: '-0.08em' }}>MangaDB</div>
+            <a href="/" style={{ fontSize: 30, fontWeight: 800, letterSpacing: '-0.08em', color: p.text, textDecoration: 'none' }}>MangaDB</a>
             <span style={{ ...sans, fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: p.muted }}>catálogo oficial</span>
           </div>
           <button onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
