@@ -16,6 +16,8 @@ MangaDB é um catálogo digital que reúne mangá, manhwa e manhua em uma experi
 
 A ideia central do projeto é centralizar uma seleção de títulos em um painel visual que permita navegar com facilidade por obras em destaque, novidades e tendências. A interface foi pensada com uma estética retrô, com blocos quadrados, capas marcantes e uma leitura mais próxima de uma prateleira de colecionador.
 
+<img width="1882" height="928" alt="image" src="https://github.com/user-attachments/assets/9cc60b42-c705-454a-abd1-f6507c4972f2" />
+
 ## Objetivo
 
 O MangaDB busca:
