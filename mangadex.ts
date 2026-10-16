@@ -4,7 +4,11 @@ const OFFICIAL_KEYS = ['amz', 'ebj', 'bw', 'engtl'];
 async function get(path: string) {
   const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), 5000);
   try {
-    const r = await fetch(BASE + path, { cache: 'no-store', signal: ctrl.signal });
+    const r = await fetch(BASE + path, {
+      cache: 'force-cache',
+      next: { revalidate: 3600 },
+      signal: ctrl.signal,
+    });
     if (!r.ok) throw new Error('MangaDex ' + r.status);
     return await r.json();
   } finally { clearTimeout(t); }

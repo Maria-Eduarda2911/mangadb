@@ -38,9 +38,19 @@ export const toCard = (i: Item, extra: string[] = []): Card => ({
 
 async function http(url: string, init: RequestInit = {}, ms = 8000) {
   const ctrl = new AbortController(); const t = setTimeout(() => ctrl.abort(), ms);
+  const opts = {
+    ...init,
+    signal: ctrl.signal,
+    headers: { Accept: 'application/json', ...(init.headers as Record<string, string>) },
+  } as RequestInit & { next?: { revalidate?: number } };
+
+  if (opts.cache === undefined) {
+    opts.cache = 'force-cache';
+    opts.next = { ...opts.next, revalidate: 300 };
+  }
+
   try {
-    return await fetch(url, { ...init, cache: 'no-store', signal: ctrl.signal,
-      headers: { Accept: 'application/json', ...(init.headers as Record<string, string>) } });
+    return await fetch(url, opts);
   } finally { clearTimeout(t); }
 }
 
