@@ -18,7 +18,7 @@ A ideia central do projeto é centralizar uma seleção de títulos em um painel
 
 <img width="1882" height="928" alt="image" src="https://github.com/user-attachments/assets/9cc60b42-c705-454a-abd1-f6507c4972f2" />
 
-Vercel https://mangadb-gamma.vercel.app
+Vercel: https://mangadb-q0iadjyci-doidos.vercel.app/
 
 ## Objetivo
 
