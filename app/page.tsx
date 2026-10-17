@@ -349,7 +349,7 @@ function Footer({ p }: { p: Palette }) {
           <p style={t}><b>Maria Eduarda Santos Silva</b> — desenvolvedora e estudante de Análise e Desenvolvimento de Sistemas.
             Criou o MangaDB como projeto de portfólio, com Next.js, React e TypeScript.</p>
           <p style={{ ...t, marginTop: 8 }}>
-            <a href="https://github.com/Maria-Eduarda2911" target="_blank" rel="noopener noreferrer" style={a}>github.com/Maria-Eduarda2911 ↗</a>
+            <a href="https://maria-eduarda2911.github.io/" target="_blank" rel="noopener noreferrer" style={a}>https://maria-eduarda2911.github.io/ ↗</a>
           </p>
         </div>
         <div>
