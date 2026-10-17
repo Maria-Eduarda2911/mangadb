@@ -52,7 +52,7 @@ O MangaDB busca:
 
 Maria Eduarda
 
-Portfolio: [https://github.com/Maria-Eduarda2911](https://maria-eduarda2911.github.io/)
+Portfolio: https://maria-eduarda2911.github.io
 
 ## Sobre o projeto
 
